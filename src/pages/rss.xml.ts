@@ -10,10 +10,13 @@ export async function GET(context: Context) {
   const blog = (await getCollection("blog"))
   .filter(post => !post.data.draft);
 
-  const projects = (await getCollection("projects"))
+  const work_projects = (await getCollection("work_projects"))
     .filter(project => !project.data.draft);
 
-  const items = [...blog, ...projects]
+  const open_source_projects = (await getCollection("open_source_projects"))
+    .filter(project => !project.data.draft);
+
+  const items = [...blog, ...work_projects, ...open_source_projects]
     .sort((a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf());
 
   return rss({

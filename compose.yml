@@ -1,0 +1,5 @@
+services:
+  personal-website:
+    image: docker.io/tensorturtle/personal-website-astro:latest
+    ports:
+      - "2201:3000"

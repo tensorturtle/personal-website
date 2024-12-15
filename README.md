@@ -2,15 +2,40 @@
 
 Forked from https://github.com/markhorn-dev/astro-nano
 
-## 📄 Configuration
+## Development
 
-The blog posts on the demo serve as the documentation and configuration.
+Install node
 
-## Commands
+```
+npm run dev
+```
 
-All commands are run from the root of the project, from a terminal:
+## Deployment
 
-Replace npm with your package manager of choice. `npm`, `pnpm`, `yarn`, `bun`, etc
+Try it out locally.
+
+```
+npm run build
+```
+
+```
+npm run preview
+```
+
+If everything is good, build the docker container for it, that uses [Caddy](https://caddyserver.com) server (that's what the `Caddyfile` is for) to serve the static files.
+
+```
+docker build -t tensorturtle/personal-website-astro .
+```
+
+Run it locally:
+```
+docker run -p 3000:3000 tensorturtle/personal-website-astro
+```
+
+Upload it to the home server.
+
+## Other commands
 
 | Command                   | Action                                           |
 | :------------------------ | :----------------------------------------------- |
@@ -25,7 +50,3 @@ Replace npm with your package manager of choice. `npm`, `pnpm`, `yarn`, `bun`, e
 | `npm run astro -- --help` | Get help using the Astro CLI                     |
 | `npm run lint`            | Run ESLint                                       |
 | `npm run lint:fix`        | Auto-fix ESLint issues                           |
-
-## 🏛️ License
-
-MIT
