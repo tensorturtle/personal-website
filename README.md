@@ -24,6 +24,8 @@ npm run preview
 
 If everything is good, build the docker container for it, that uses [Caddy](https://caddyserver.com) server (that's what the `Caddyfile` is for) to serve the static files.
 
+Currently, you must build on the same platform (linux/amd64) as the deployment server.
+
 ```
 docker build -t tensorturtle/personal-website-astro .
 ```
