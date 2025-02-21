@@ -10,7 +10,7 @@ const blog = defineCollection({
   }),
 });
 
-const work = defineCollection({
+const portfolio= defineCollection({
   type: "content",
   schema: z.object({
     company: z.string(),
@@ -20,28 +20,4 @@ const work = defineCollection({
   }),
 });
 
-const work_projects = defineCollection({
-  type: "content",
-  schema: z.object({
-    title: z.string(),
-    description: z.string(),
-    date: z.coerce.date(),
-    draft: z.boolean().optional(),
-    demoURL: z.string().optional(),
-    repoURL: z.string().optional()
-  }),
-});
-
-const open_source_projects = defineCollection({
-  type: "content",
-  schema: z.object({
-    title: z.string(),
-    description: z.string(),
-    date: z.coerce.date(),
-    draft: z.boolean().optional(),
-    demoURL: z.string().optional(),
-    repoURL: z.string().optional()
-  }),
-});
-
-export const collections = { blog, work, work_projects, open_source_projects };
+export const collections = { blog, portfolio };

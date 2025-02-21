@@ -4,83 +4,56 @@ import Container from "@components/Container.astro";
 import PageLayout from "@layouts/PageLayout.astro";
 import ArrowCard from "@components/ArrowCard.astro";
 import Link from "@components/Link.astro";
-import { dateRange } from "@lib/utils";
-import { SITE, HOME, SOCIALS } from "@consts";
+import { SITE, HOME} from "@consts";
+import { Icon } from "@astrojs/starlight/components";
 
 const blog = (await getCollection("blog"))
   .filter(post => !post.data.draft)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   .slice(0,SITE.NUM_POSTS_ON_HOMEPAGE);
 
-const work_projects = (await getCollection("work_projects"))
-  .filter(work_project => !work_project.data.draft)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0,SITE.NUM_WORK_PROJECTS_ON_HOMEPAGE);
-
-const open_source_projects = (await getCollection("open_source_projects"))
-  .filter(oss_project => !oss_project.data.draft)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0,SITE.NUM_OSS_PROJECTS_ON_HOMEPAGE);
-
-const allwork = (await getCollection("work"))
-  .sort((a, b) => new Date(b.data.dateStart).valueOf() - new Date(a.data.dateStart).valueOf())
-  .slice(0,SITE.NUM_WORKS_ON_HOMEPAGE);
-
-const work = await Promise.all(
-  allwork.map(async (item) => {
-    const { Content } = await item.render();
-    return { ...item, Content };
-  })
-);
-
 ---
 
 <PageLayout title={HOME.TITLE} description={HOME.DESCRIPTION}>
   <Container>
-    <h4 class="animate font-semibold text-black dark:text-white">
-      Hi, I'm Jason <span class="text-xl">👋🏻</span> 
-    </h4>
+    <div class="flex flex-col items-center space-y-4">
+      <div class="animate">
+        <img src="/turtle.png" alt="Turtle" class="w-16 h-16 rounded" />
+      </div>
+      <h4 class="animate font-semibold text-black dark:text-white">
+        Hi, I'm Jason <span class="text-xl">👋🏻</span> 
+      </h4>
+
+    </div>
     <div class="space-y-16">
       <section>
         <article class="space-y-4">
           <p class="animate">
-            I'm full-stack developer with expertise in building innovative hardware and software products. 
-            I have a Bachelor of Science in Neuroscience from Purdue University and professional experience leading every aspect 
-            of product development—from customer research and systems architecture to hands-on development and deployment.
+            I believe in building insanely great technology that inspires thoughtfulness and authenticity.
+            Most of my work so far has been at the intersection of cycling and computer vision. Right now I'm building Velovision.
+          </p>
+
+          <p class="animate">
+            The world is full of interesting problems to be solved.
+            If you've got one that is near and dear to your heart, I want to hear from you.
+
+            If you happen to be in Seoul, South Korea, we can meet up in person.
           </p>
           <p class="animate">
-            As a founder and CTO, I’ve navigated complex startup environments, made critical engineering decisions, and delivered 
-            high-performance products under tight timelines. My work spans SaaS web platforms, iOS apps, and embedded robotics, 
-            with a focus on delivering real-world impact through deeply informed, practical solutions.
-          </p>
-          <p class="animate">
-            Welcome to my portfolio.
+            I frequently <a href="/blog">blog</a> about my technical problem-solving journeys and other random things.
           </p>
         </article>
       </section>
 
-      <section>
-        <article class="space-y-4">
-          <div class="animate">
-            <p class="font-bold">
-              Prefer to see my work in a more traditional format?
-            </p>
-          </div>
-          <div class="animate">
-            <a 
-              href="/Janghyup_Sohn_Resume.pdf"
-              download 
-              class="p-2 rounded-lg border border-black/15 dark:border-white/20 hover:bg-black/5 dark:hover:bg-white/5 hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out"
-            >
-              Download Resume
-            </a>
-          </div>
-        </article>
+      <section class="animate space-y-6 flex items-baseline space-x-2">
+        <Icon name="email" class="relative top-[3px]" />
+        <a href="mailto:tensorturtle@gmail.com" class="hover:underline">tensorturtle@gmail.com</a>
       </section>
+
       <section class="animate space-y-6">
         <div class="flex flex-wrap gap-y-2 items-center justify-between">
           <h5 class="font-semibold text-black dark:text-white">
-            Latest posts
+            Latest from the blog
           </h5>
           <Link href="/blog">
             See all posts
@@ -94,95 +67,7 @@ const work = await Promise.all(
           ))}
         </ul>
       </section>
-
-      <section class="animate space-y-6">
-        <div class="flex flex-wrap gap-y-2 items-center justify-between">
-          <h5 class="font-semibold text-black dark:text-white">
-            Work Experience
-          </h5>
-          <Link href="/work">
-            See all work
-          </Link>
-        </div>
-        <ul class="flex flex-col space-y-4">
-          {work.map(entry => (
-            <li>
-              <div class="text-sm opacity-75">
-                {dateRange(entry.data.dateStart, entry.data.dateEnd)}
-              </div>
-              <div class="font-semibold text-black dark:text-white">
-                {entry.data.company}
-              </div>
-              <div class="text-sm opacity-75">
-                {entry.data.role}
-              </div>
-              <article>
-                <entry.Content />
-              </article>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section class="animate space-y-6">
-        <div class="flex flex-wrap gap-y-2 items-center justify-between">
-          <h5 class="font-semibold text-black dark:text-white">
-            Recent Work Projects
-          </h5>
-          <Link href="/work-projects">
-            See all work projects
-          </Link>
-        </div>
-        <ul class="flex flex-col gap-4">
-          {work_projects.map(work_project => (
-            <li>
-              <ArrowCard entry={work_project} />
-            </li>
-          ))}
-        </ul>
-        <div class="flex flex-wrap gap-y-2 items-center justify-between">
-          <h5 class="font-semibold text-black dark:text-white">
-            Recent Open Source Projects
-          </h5>
-          <Link href="/work-projects">
-            See all open source projects
-          </Link>
-        </div>
-        <ul class="flex flex-col gap-4">
-          {open_source_projects.map(oss_project => (
-            <li>
-              <ArrowCard entry={oss_project} />
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section class="animate space-y-4">
-        <h5 class="font-semibold text-black dark:text-white">
-          Let's Connect
-        </h5>
-        <article>
-          <p>
-            If you want to get in touch with me about something or just to say hi,
-            reach out on social media or send me an email.
-          </p>
-        </article>
-        <ul class="flex flex-wrap gap-2">
-          {SOCIALS.map(SOCIAL => (
-            <li class="flex gap-x-2 text-nowrap">
-              <Link href={SOCIAL.HREF} external aria-label={`${SITE.NAME} on ${SOCIAL.NAME}`}>
-                {SOCIAL.NAME}
-              </Link>
-              {"/"}
-            </li>
-          ))}
-          <li class="line-clamp-1">
-            <Link href={`mailto:${SITE.EMAIL}`} aria-label={`Email ${SITE.NAME}`}>
-              {SITE.EMAIL}
-            </Link>
-          </li>
-        </ul>
-      </section>
+    
     </div>
   </Container>
 </PageLayout>

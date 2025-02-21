@@ -1,4 +1,4 @@
-import type { Site, Metadata, Socials } from "@types";
+import type { Site, Metadata} from "@types";
 
 export const SITE: Site = {
   NAME: "Jason Sohn",
@@ -19,32 +19,7 @@ export const BLOG: Metadata = {
   DESCRIPTION: "Announcements, Lessons, and Direction.",
 };
 
-export const WORK: Metadata = {
-  TITLE: "Work",
-  DESCRIPTION: "Previous and current work.",
+export const PORTFOLIO: Metadata = {
+  TITLE: "Portfolio",
+  DESCRIPTION: "Completed projects.",
 };
-
-export const WORK_PROJECTS: Metadata = {
-  TITLE: "Work Projects",
-  DESCRIPTION: "A collection of my work projects, with links to demos.",
-};
-
-export const OPEN_SOURCE_PROJECTS: Metadata = {
-  TITLE: "Open Source Projects",
-  DESCRIPTION: "A collection of my open source projects, with links to repos.",
-};
-
-export const SOCIALS: Socials = [
-  { 
-    NAME: "twitter-x",
-    HREF: "https://twitter.com/tensorturtle",
-  },
-  { 
-    NAME: "github",
-    HREF: "https://github.com/tensorturtle"
-  },
-  { 
-    NAME: "linkedin",
-    HREF: "https://www.linkedin.com/in/jasonsohnsquared/",
-  }
-];
