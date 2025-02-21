@@ -33,7 +33,15 @@ Run it locally:
 docker run -p 3000:3000 tensorturtle/personal-website-astro
 ```
 
-Upload it to the home server.
+Upload it to the docker hub:
+```
+docker push tensorturtle/personal-website-astro
+```
+On the server, reload the docker compose file:
+```
+docker compose pull
+docker compose up -d
+```
 
 ## Other commands
 
