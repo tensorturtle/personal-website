@@ -7,6 +7,10 @@ Forked from https://github.com/markhorn-dev/astro-nano
 Install node
 
 ```
+npm install
+```
+
+```
 npm run dev
 ```
 
@@ -27,7 +31,7 @@ If everything is good, build the docker container for it, that uses [Caddy](http
 Currently, you must build on the same platform (linux/amd64) as the deployment server.
 
 ```
-docker build -t tensorturtle/personal-website-astro .
+docker build -t --platform linux/amd64 tensorturtle/personal-website-astro .
 ```
 
 Run it locally:

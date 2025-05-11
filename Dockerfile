@@ -17,7 +17,7 @@ COPY . .
 RUN npm run build
 
 # Stage 2: Serve
-FROM --platform=linux/amd64 caddy:alpine
+FROM caddy:alpine
 
 # Copy built files to Caddy's default web root
 COPY --from=build /app/dist /srv
