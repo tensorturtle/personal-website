@@ -5,7 +5,7 @@ date: "May 12 2025"
 draft: true
 ---
 
-This is in the brainstorming and research step.
+This is in the brainstorming and research step. Below is the initial Deepseek v3 outline. I am currently running Gemini Deep Research to get more context.
 
 Prompt to Deepseek v3: "Help me brainstorm an essay linking contemporary AI and ‘market for lemons’ - the economics idea that in an asymmetric information market, the bad pushes out the good, and therefore causes a market failure. I think that the output of LLMs and AI today creates a lot of ‘reasonable-sounding’ and ‘reasonable-looking’, and actually on the surface potentially more appealing content, which is in reality lower quality, and therefore are lemons. "
 
