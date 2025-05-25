@@ -19,3 +19,13 @@ draft: true
     + If I don't pay to travel abroad when I am assigned reservist training, assuming I will not show up to reservist training (due to non-negociable personal freedom), the government similarly threatens me with more fines and potential jail time.
 
 Thus I am obligated to travel abroad in order to evade reservist training in order to live an authentic life.
+
+For solo stays at airport hotels, it's a thing that John Carmack does when he needs time to focus and study something.
+
+## Allostatic Load
+
+```
+Allostatic load refers to the cumulative biological dysregulation resulting from chronic stress or prolonged exposure to life stressors.
+```
+
+I have felt severe subconscious, quite physiological hormonal and nervous dysregulation when I was reminded of my situation of being subject to losing my freedom. To me, the thought of military reservist training triggers a fight or flight response. It does so doubly because I think that during my actual 19-month military service, I did neither sufficiently fight or flight the situations I found myself in, and this inaction, this inner peace, allowed the powers above me to disregard my humanity and dignity with utter carelessness. And I only learned this near the very end of my service, where I stood up for 수민, and that action actually led him to be re-assigned to a different team. This demonstrated that it was indeed possible to make a difference in one's situation after all. Further dramatic moments also influenced by thinking at the time, such as when I ran for senior KATUSA but was disqualified unreasonably. My intention here is not to blame myself for not standing up for myself but rather to explain my now overdeveloped sensitivity for the need to stand up for oneself against such injustices.
