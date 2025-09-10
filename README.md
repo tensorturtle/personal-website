@@ -28,10 +28,16 @@ npm run preview
 
 If everything is good, build the docker container for it, that uses [Caddy](https://caddyserver.com) server (that's what the `Caddyfile` is for) to serve the static files.
 
-Currently, you must build on the same platform (linux/amd64) as the deployment server.
+### Building for AMD64 (Linux servers)
 
-```
-docker build -t --platform linux/amd64 tensorturtle/personal-website-astro .
+**Important:** On ARM64 Macs (Apple Silicon), there's a known issue with Astro builds using Docker BuildKit. Use the legacy builder instead:
+
+```bash
+# For ARM64 Macs building for AMD64 Linux servers:
+DOCKER_BUILDKIT=0 docker build --platform linux/amd64 -t tensorturtle/personal-website-astro .
+
+# For native builds (no cross-platform):
+docker build -t tensorturtle/personal-website-astro .
 ```
 
 Run it locally:
@@ -40,7 +46,7 @@ docker run -p 3000:3000 tensorturtle/personal-website-astro
 ```
 
 Upload it to the docker hub:
-```
+```bash
 docker push tensorturtle/personal-website-astro
 ```
 On the server, reload the docker compose file:

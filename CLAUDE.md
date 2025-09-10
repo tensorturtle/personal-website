@@ -52,6 +52,19 @@ This is Jason Sohn's personal website built with Astro, featuring a blog and por
 ## Deployment
 
 Production deployment uses Docker:
-1. Build: `docker build --platform linux/amd64 -t tensorturtle/personal-website-astro .`
-2. Push to Docker Hub: `docker push tensorturtle/personal-website-astro`
-3. On server: `docker compose pull && docker compose up -d`
+
+### Building for AMD64 (Linux servers)
+**Important:** Due to an Astro build issue with Docker BuildKit on ARM64 Macs, use the legacy builder:
+```bash
+DOCKER_BUILDKIT=0 docker build --platform linux/amd64 -t tensorturtle/personal-website-astro .
+```
+
+### Push to Docker Hub
+```bash
+docker push tensorturtle/personal-website-astro
+```
+
+### Deploy on server
+```bash
+docker compose pull && docker compose up -d
+```
