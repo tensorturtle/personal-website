@@ -1,0 +1,32 @@
+---
+title: "Introducing Contextful Bible: A New Way to Connect Scripture with Your Thoughts"
+description: "Announcing a free AI-powered tool that helps you discover relevant Bible verses as you write, making it easier to let God's Word inform your daily expressions of faith"
+date: 2025-10-25
+---
+
+I kept running into the same problem. I'd be journaling about something I was struggling with, and I'd think "there's definitely a Bible verse about this." But I couldn't remember it. I'd stop writing, open a concordance, search through keywords. By the time I found something, I'd lost my train of thought.
+
+So I thought: what if the verses could just appear as I write?
+
+## Building a Solution
+
+I built **[Contextful Bible](https://contextful-bible.tensorturtle.com)**. It's a free web tool that watches what you type and suggests relevant Bible verses in real time. The key was using AI that understands meaning, not just keywords. I wanted it to catch the essence of what I'm saying, not just match individual words.
+
+I also made sure that when you click a verse, you see the whole chapter context. I've seen too many verses misused because they were pulled out of context. Every verse lives in a chapter, and you need to see what comes before and after.
+
+## My Motivation
+
+I generally like it when I am somehow 'forced' to be closer with the word of God. I've liked taking theology classes in college and being 'required' to read long Old Testament passages. I'm currently taking a discipleship course in my church and similarly enjoy being told to copy over various New Testament passages in a workbook. This project similarly involved interacting with the bible verses during data preprocessing and testing.
+
+This was my first time using [marimo](https://marimo.io). I had enjoyed using Jupyter notebooks a few years ago (2020-2021) while learning Deep Learning for the first time, and kind of missed that particular programming/learning experience. Marimo provides much cleaner and deployment-ready tools for user-facing apps. This was a big factor in my motivation for starting this project.
+
+Lastly, I enjoyed working closely with the state-of-the-art in language model related technologies: vector embeddings(embeddinggemma-300m), vector databases(sqlite-vec), and high-speed inference (Qwen3 model on Cerebras)
+
+## Limitations
+
+Because I am fluent in just English and Korean, I have no idea whether the other supported languages are providing equally high-quality outputs. If you are multi-lingual and have feedback, please let me know.
+
+## Try It Out
+
+You can use it at [contextful-bible.tensorturtle.com](https://contextful-bible.tensorturtle.com).
+It is free. The inference cost is very low for now so I am offering it as a public service.
