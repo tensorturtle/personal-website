@@ -1,0 +1,75 @@
+---
+import Container from "@components/Container.astro";
+import PageLayout from "@layouts/PageLayout.astro";
+import Link from "@components/Link.astro";
+---
+
+<PageLayout title="SecondThought" description="Your personal AI companion for iPhone and Apple Watch">
+  <Container>
+    <div class="space-y-12">
+      <section class="text-center space-y-6">
+        <div class="animate">
+          <h1 class="text-4xl font-bold text-black dark:text-white">
+            SecondThought
+          </h1>
+        </div>
+        <p class="animate text-xl text-gray-600 dark:text-gray-300">
+          Your personal AI companion for iPhone and Apple Watch
+        </p>
+      </section>
+
+      <section class="animate space-y-6">
+        <h2 class="text-2xl font-semibold text-black dark:text-white">
+          Bring Your Own AI
+        </h2>
+        <article class="space-y-4">
+          <p>
+            SecondThought lets you connect to any OpenAI-compatible API endpoint, giving you full control over your AI experience. Use OpenRouter (default), OpenAI, or any compatible provider.
+          </p>
+          <p>
+            Get quick AI assistance right from your wrist with Apple Watch support, or use the full iPhone app for longer conversations.
+          </p>
+        </article>
+      </section>
+
+      <section class="animate space-y-6">
+        <h2 class="text-2xl font-semibold text-black dark:text-white">
+          Features
+        </h2>
+        <ul class="list-disc list-inside space-y-2">
+          <li>Works with any OpenAI-compatible API</li>
+          <li>OpenRouter integration out of the box</li>
+          <li>Native iPhone and Apple Watch apps</li>
+          <li>Your API key stays on your device</li>
+          <li>No account required</li>
+        </ul>
+      </section>
+
+      <section class="animate space-y-6">
+        <h2 class="text-2xl font-semibold text-black dark:text-white">
+          Download
+        </h2>
+        <p>
+          Coming soon to the App Store.
+        </p>
+      </section>
+
+      <section class="animate space-y-4">
+        <h2 class="text-2xl font-semibold text-black dark:text-white">
+          Links
+        </h2>
+        <ul class="space-y-2">
+          <li>
+            <Link href="/secondthought/privacy-policy">Privacy Policy</Link>
+          </li>
+        </ul>
+      </section>
+
+      <section class="animate text-center text-sm text-gray-500 dark:text-gray-400">
+        <p>
+          Made by <Link href="/">Jason Sohn</Link>
+        </p>
+      </section>
+    </div>
+  </Container>
+</PageLayout>

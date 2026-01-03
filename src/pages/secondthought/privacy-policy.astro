@@ -1,0 +1,96 @@
+---
+import Container from "@components/Container.astro";
+import PageLayout from "@layouts/PageLayout.astro";
+import Link from "@components/Link.astro";
+---
+
+<PageLayout title="SecondThought Privacy Policy" description="Privacy Policy for SecondThought iOS app">
+  <Container>
+    <div class="space-y-8">
+      <section class="space-y-4">
+        <h1 class="animate text-3xl font-bold text-black dark:text-white">
+          Privacy Policy
+        </h1>
+        <p class="animate text-sm text-gray-500 dark:text-gray-400">
+          Last updated: January 4, 2026
+        </p>
+      </section>
+
+      <article class="prose dark:prose-invert max-w-none space-y-6">
+        <section class="animate space-y-4">
+          <h2 class="text-xl font-semibold text-black dark:text-white">Overview</h2>
+          <p>
+            SecondThought is designed with privacy in mind. This policy explains how we handle your data in the SecondThought app for iPhone and Apple Watch.
+          </p>
+        </section>
+
+        <section class="animate space-y-4">
+          <h2 class="text-xl font-semibold text-black dark:text-white">Data Collection</h2>
+          <p>
+            <strong>We do not collect any personal data.</strong> SecondThought operates entirely on your device with no data sent to our servers.
+          </p>
+        </section>
+
+        <section class="animate space-y-4">
+          <h2 class="text-xl font-semibold text-black dark:text-white">API Keys and Credentials</h2>
+          <p>
+            Your API keys (for OpenRouter, OpenAI, or other providers) are stored locally on your device using secure storage. We never transmit, collect, or have access to your API keys.
+          </p>
+        </section>
+
+        <section class="animate space-y-4">
+          <h2 class="text-xl font-semibold text-black dark:text-white">Conversations and Messages</h2>
+          <p>
+            Your conversations are stored locally on your device. When you send a message, it is transmitted directly from your device to your chosen AI provider (e.g., OpenRouter, OpenAI). We do not route, store, or have access to any of your conversations.
+          </p>
+          <p>
+            Please review the privacy policy of your chosen AI provider to understand how they handle your data.
+          </p>
+        </section>
+
+        <section class="animate space-y-4">
+          <h2 class="text-xl font-semibold text-black dark:text-white">Third-Party Services</h2>
+          <p>
+            SecondThought connects to third-party AI providers based on your configuration. By default, the app uses OpenRouter. Each provider has their own privacy policy:
+          </p>
+          <ul class="list-disc list-inside space-y-1">
+            <li><a href="https://openrouter.ai/privacy" class="underline hover:no-underline" target="_blank" rel="noopener noreferrer">OpenRouter Privacy Policy</a></li>
+            <li><a href="https://openai.com/privacy" class="underline hover:no-underline" target="_blank" rel="noopener noreferrer">OpenAI Privacy Policy</a></li>
+          </ul>
+        </section>
+
+        <section class="animate space-y-4">
+          <h2 class="text-xl font-semibold text-black dark:text-white">Analytics and Tracking</h2>
+          <p>
+            SecondThought does not include any analytics, tracking, or advertising frameworks. We do not track your usage of the app.
+          </p>
+        </section>
+
+        <section class="animate space-y-4">
+          <h2 class="text-xl font-semibold text-black dark:text-white">Data Sharing</h2>
+          <p>
+            We do not share any data with third parties because we do not collect any data. Your interactions go directly between your device and your chosen AI provider.
+          </p>
+        </section>
+
+        <section class="animate space-y-4">
+          <h2 class="text-xl font-semibold text-black dark:text-white">Changes to This Policy</h2>
+          <p>
+            We may update this privacy policy from time to time. Any changes will be posted on this page with an updated revision date.
+          </p>
+        </section>
+
+        <section class="animate space-y-4">
+          <h2 class="text-xl font-semibold text-black dark:text-white">Contact</h2>
+          <p>
+            If you have any questions about this privacy policy, please contact us at <a href="mailto:tensorturtle@gmail.com" class="underline hover:no-underline">tensorturtle@gmail.com</a>.
+          </p>
+        </section>
+      </article>
+
+      <section class="animate pt-8">
+        <Link href="/secondthought">&larr; Back to SecondThought</Link>
+      </section>
+    </div>
+  </Container>
+</PageLayout>
