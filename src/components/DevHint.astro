@@ -1,0 +1,32 @@
+---
+/**
+ * Scaffolding note, visible only in `npm run dev`.
+ *
+ * These are prompts for rewriting the site toward the stewardship framing in
+ * ~/Repos/jesus-in-me-website/README.md. They are deliberately questions rather
+ * than replacement copy — the words on this site should be yours.
+ *
+ * `import.meta.env.DEV` is false for `npm run build`, so nothing here is ever
+ * emitted into `dist/`. Delete this component and its usages once the rewrite
+ * is done.
+ */
+type Props = {
+  section: string;
+};
+
+const { section } = Astro.props;
+---
+
+{import.meta.env.DEV && (
+  <aside
+    class="not-prose my-4 border border-dashed border-amber-500/60 bg-amber-500/5 px-4 py-3 text-sm rounded"
+    data-dev-hint
+  >
+    <div class="font-semibold text-amber-700 dark:text-amber-400 mb-2">
+      dev note — {section}
+    </div>
+    <div class="space-y-2 text-black/70 dark:text-white/70 [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-1">
+      <slot />
+    </div>
+  </aside>
+)}

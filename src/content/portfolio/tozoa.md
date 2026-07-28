@@ -3,6 +3,11 @@ company: "Tozoa AI"
 role: "Founder"
 dateStart: "06/01/2023"
 dateEnd: "08/08/2024"
+gifts:
+  - llm-applications
+  - ml-evaluation
+  - technical-leadership
+
 ---
 
 Led a team to create and market PrepGPT, an LLM-based tool for generating SAT questions. We collaborated with top SAT teachers from prestigious Korean academies, leveraging their expertise to ensure high-quality content. PrepGPT achieved sales to institutions, tutors, and internationally, including a client in Singapore.

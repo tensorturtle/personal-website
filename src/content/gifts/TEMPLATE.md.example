@@ -1,0 +1,15 @@
+---
+# Copy this to a new .md file in this directory to catalog a gift.
+name: ""
+domain: ""
+summary: ""            # one line, concrete: what you can be handed
+depth:                 # familiar | working | deep — delete the line if unsure
+offered: false         # true if you want to be asked for this
+evidence:
+  - label: ""
+    href: ""
+draft: true
+---
+
+What you can actually do with this, where it came from, and where its edges are.
+Naming the limit is part of the claim being true.

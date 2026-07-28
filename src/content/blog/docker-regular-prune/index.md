@@ -3,6 +3,9 @@ title: "Prune your Docker"
 description: "Slightly dumb edge cases in self-hosting sysadmin roleplay."
 date: "May 12 2025"
 draft: false
+gifts:
+  - self-hosting
+
 ---
 
 # Prune your Docker

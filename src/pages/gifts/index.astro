@@ -1,0 +1,228 @@
+---
+import { getCollection, render } from "astro:content";
+import PageLayout from "@layouts/PageLayout.astro";
+import Container from "@components/Container.astro";
+import Link from "@components/Link.astro";
+import DevHint from "@components/DevHint.astro";
+import { GIFTS } from "@consts";
+
+// Drafts are visible in `npm run dev` only, so the candidate entries are
+// reviewable here without being published.
+const collection = (await getCollection("gifts"))
+  .filter(entry => import.meta.env.DEV || !entry.data.draft);
+
+// Reverse index: what each gift has actually produced. Tags live on the posts and
+// portfolio entries (their `gifts:` frontmatter), so this is derived, never duplicated.
+const posts = (await getCollection("blog")).filter(p => import.meta.env.DEV || !p.data.draft);
+const works = await getCollection("portfolio");
+
+const worksFor = (id: string) =>
+  works.filter(w => w.data.gifts?.includes(id));
+const postsFor = (id: string) =>
+  posts.filter(p => p.data.gifts?.includes(id))
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const gifts = await Promise.all(
+  collection.map(async (entry) => {
+    const { Content } = await render(entry);
+    return {
+      ...entry,
+      Content,
+      works: worksFor(entry.id),
+      posts: postsFor(entry.id),
+    };
+  })
+);
+
+// Tags pointing at gift files that do not exist — surfaced rather than thrown.
+const knownIds = new Set(collection.map(e => e.id));
+const orphanTags = [...new Set(
+  [...posts, ...works].flatMap(e => e.data.gifts ?? []).filter(id => !knownIds.has(id))
+)].sort();
+
+// Content carrying no theme tag at all.
+const untagged = [...posts, ...works].filter(e => !e.data.gifts?.length);
+
+type Acc = { [domain: string]: typeof gifts };
+
+const byDomain = gifts.reduce((acc: Acc, gift) => {
+  const domain = gift.data.domain || "Unsorted";
+  if (!acc[domain]) acc[domain] = [];
+  acc[domain].push(gift);
+  return acc;
+}, {});
+
+const domains = Object.keys(byDomain).sort();
+
+const published = gifts.filter(g => !g.data.draft).length;
+const drafts = gifts.length - published;
+---
+
+<PageLayout title={GIFTS.TITLE} description={GIFTS.DESCRIPTION}>
+  <Container>
+    <div class="space-y-10">
+      <div class="animate font-semibold text-black dark:text-white">
+        Gifts
+      </div>
+
+      <DevHint section="Gifts — the section itself">
+        <p>
+          <strong>{published} published, {drafts} draft candidate{drafts === 1 ? "" : "s"}.</strong>
+          Drafts are visible here in dev only. Each has a name, a domain, and evidence
+          drawn from your own portfolio entries and posts — but a deliberately empty
+          <code>summary</code>, and no <code>depth</code>. Those two are self-assessment,
+          which is yours to make. Fill them in and remove <code>draft: true</code> to publish.
+        </p>
+        <p>
+          <strong>The name.</strong> "Gifts" rather than Skills or Expertise, because it
+          carries the received-and-held-in-trust sense in ordinary English without any
+          religious vocabulary — the subtlety pillar exactly. It also quietly does the
+          service-over-ego inversion, since a gift is something you were given rather than
+          something you achieved. If it reads as too much, <code>Capabilities</code> or
+          <code>Craft</code> are the neutral fallbacks; the route and collection are named
+          <code>gifts</code> in one place each and are cheap to rename now.
+        </p>
+        <p>
+          <strong>Still to decide, and only you can:</strong>
+        </p>
+        <ul>
+          <li>
+            <strong>An opening line.</strong> There is deliberately none — I would be
+            putting words in your mouth again. But the page needs one sentence saying why
+            this list exists, or it reads as a résumé, which is the one thing it must not
+            be. Your framing was "in case my skills are needed in a particular place."
+          </li>
+          <li>
+            <strong>What <code>offered: true</code> means in practice.</strong> Right now
+            every candidate is <code>false</code>. Marking some true is what turns this
+            from a record into an availability list — and implies the reader can act on it,
+            which means it should connect to how you want to be contacted.
+          </li>
+          <li>
+            <strong>What is missing.</strong> This set is derived only from what the repo
+            evidences, so it is biased toward the technical and the documented. Things
+            learned in church, in family, in Korean-language contexts, or in the army
+            beyond photography leave no trace here — and the ones without a portfolio
+            entry may be the ones most worth cataloging.
+          </li>
+          <li>
+            <strong>Whether depth should be public at all.</strong> The scale is coarse by
+            design, but publishing it is still a public self-rating. Omitting it everywhere
+            is a legitimate choice.
+          </li>
+        </ul>
+        <p>
+          <strong>Theme classification is wired up.</strong> Add <code>gifts:</code> to any
+          post or portfolio entry's frontmatter with a list of gift ids (filenames here,
+          without <code>.md</code>), and it appears under those gifts automatically. The tag
+          lives on the post so there is one source of truth — nothing to keep in sync.
+        </p>
+        {orphanTags.length > 0 && (
+          <p>
+            <strong>Tags pointing at nonexistent gifts:</strong> <code>{orphanTags.join(", ")}</code>.
+            Either create the file or fix the tag.
+          </p>
+        )}
+        {untagged.length > 0 && (
+          <p>
+            <strong>Untagged ({untagged.length}):</strong>{" "}
+            {untagged.map(e => e.id).join(", ")}. I tagged only what the text plainly
+            supported. The Christian and essay-style posts are deliberately untagged —
+            classifying those means deciding what they are <em>about</em>, which is
+            interpretation rather than fact, and yours to do.
+          </p>
+        )}
+      </DevHint>
+
+      {domains.length === 0 && (
+        <p class="animate">Nothing catalogued yet.</p>
+      )}
+
+      <div class="space-y-8">
+        {domains.map(domain => (
+          <section class="animate space-y-4">
+            <div class="font-semibold text-black dark:text-white">
+              {domain}
+            </div>
+            <ul class="flex flex-col space-y-6">
+              {byDomain[domain].map(gift => (
+                <li class="space-y-1">
+                  <div class="flex flex-wrap items-baseline gap-x-2">
+                    <span class="font-semibold text-black dark:text-white">
+                      {gift.data.name}
+                    </span>
+                    {gift.data.depth && (
+                      <span class="text-sm opacity-75">{gift.data.depth}</span>
+                    )}
+                    {gift.data.offered && (
+                      <span class="text-sm opacity-75">&middot; available</span>
+                    )}
+                    {import.meta.env.DEV && gift.data.draft && (
+                      <span class="text-sm text-amber-700 dark:text-amber-400">
+                        &middot; draft
+                      </span>
+                    )}
+                  </div>
+                  {gift.data.facets && gift.data.facets.length > 0 && (
+                    <p class="text-sm opacity-75">
+                      {gift.data.facets.join(" · ")}
+                    </p>
+                  )}
+                  {gift.data.summary && (
+                    <p class="text-sm">{gift.data.summary}</p>
+                  )}
+                  <article class="text-sm opacity-75">
+                    <gift.Content />
+                  </article>
+
+                  {/* Derived from `gifts:` tags on the entries themselves. */}
+                  {gift.works.length > 0 && (
+                    <ul class="text-sm opacity-75 space-y-1">
+                      {gift.works.map(work => (
+                        <li>
+                          <Link href="/portfolio">{work.data.company}</Link>
+                          {` — ${work.data.role}`}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                  {gift.posts.length > 0 && (
+                    <ul class="text-sm opacity-75 space-y-1">
+                      {gift.posts.map(post => (
+                        <li>
+                          <Link href={`/blog/${post.id}`}>{post.data.title}</Link>
+                          {import.meta.env.DEV && post.data.draft && (
+                            <span class="text-amber-700 dark:text-amber-400"> · draft</span>
+                          )}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                  {gift.data.evidence && gift.data.evidence.length > 0 && (
+                    <ul class="text-sm opacity-75 space-y-1">
+                      {gift.data.evidence.map(item => (
+                        <li>
+                          {item.href
+                            ? <Link href={item.href}>{item.label}</Link>
+                            : item.label}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                  {import.meta.env.DEV
+                    && gift.works.length === 0
+                    && gift.posts.length === 0
+                    && !gift.data.evidence?.length && (
+                    <p class="text-sm text-amber-700 dark:text-amber-400">
+                      no evidence, no tagged work or writing — this one rests on assertion alone
+                    </p>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))}
+      </div>
+    </div>
+  </Container>
+</PageLayout>

@@ -3,6 +3,9 @@ title: "Building this site"
 description: "Simple, self hosted, designed to last."
 date: "Jan 1 2022"
 draft: false
+gifts:
+  - self-hosting
+
 ---
 
 # Building This Site 

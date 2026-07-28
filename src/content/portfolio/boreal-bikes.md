@@ -3,6 +3,14 @@ company: "Boreal Bikes"
 role: "Machine Vision Developer, Chief Technology Officer"
 dateStart: "02/01/2022"
 dateEnd: "05/01/2023"
+gifts:
+  - computer-vision
+  - sensor-fusion
+  - embedded-systems
+  - cycling
+  - technical-leadership
+  - research-collaboration
+
 ---
 
 Implemented multi-camera object detection and fusion, enabling clients to benchmark novel computer vision models on Boreal Bikes research bike platform.

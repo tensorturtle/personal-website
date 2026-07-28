@@ -3,6 +3,7 @@ import { getCollection, render } from "astro:content";
 import PageLayout from "@layouts/PageLayout.astro";
 import Container from "@components/Container.astro";
 import { dateRange } from "@lib/utils";
+import DevHint from "@components/DevHint.astro";
 import { PORTFOLIO } from "@consts";
 
 const collection = (await getCollection("portfolio"))
@@ -20,8 +21,30 @@ const portfolio= await Promise.all(
   <Container>
     <div class="space-y-10">
       <div class="animate font-semibold text-black dark:text-white">
-        Portfolio
+        Contributions
       </div>
+      <DevHint section="Contributions index">
+        <p>
+          The <code>portfolio</code> schema is <code>company</code> / <code>role</code> /
+          <code>dateStart</code> / <code>dateEnd</code> — the shape of a résumé. It can
+          express where you were and what you were called, but has nowhere to record
+          <em>who was served</em> or <em>what problem was solved</em>. Under the
+          "service over ego" pillar that missing field is the point of the section.
+        </p>
+        <p>
+          Each entry currently leads with the company name in bold and the role beneath.
+          Leading with the problem instead, and letting company and role follow as
+          provenance, would invert this without losing any information.
+        </p>
+        <p>
+          Ayni Health is absent from the four entries (army, boreal-bikes, hydo, tozoa),
+          so the site's record of contribution stops before the current work.
+        </p>
+        <p>
+          There is also dead code below: an empty commented-out <code>&lt;ul&gt;</code>.
+          Excellence-as-stewardship makes that worth deleting.
+        </p>
+      </DevHint>
       <ul class="flex flex-col space-y-4">
         { 
           portfolio.map(entry => (
