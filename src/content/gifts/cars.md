@@ -1,25 +1,31 @@
 ---
 name: "Cars"
 domain: "Practical"
-summary: ""
+summary: "Probe a vehicle's CAN bus to find out what the car will actually tell you"
 facets:
   - "Basic maintenance"
   - "Mechanical internals"
   - "CAN bus analysis"
+  - "UDS / OBD-II diagnostics"
 offered: false
 evidence:
-  - label: "comma.ai"
-    href: "https://comma.ai"
+  - label: "casper-can — reverse-engineered the CAN bus of a 2024 Hyundai Casper"
+    href: "https://github.com/tensorturtle/casper-can"
 draft: true
 ---
 
-Your words, unedited: "Cars (basic maintenance, understanding of mechanical
-internals, CAN bus analysis, etc. (comma.ai))".
+Reverse-engineering my own car: a 2024 Hyundai Casper (AX), 1.0 T-GDi with HDA I,
+to find out whether it could run comma.ai's openpilot. Python tooling over a USB
+CAN adapter speaks UDS and OBD-II to the diagnostic connector — vehicle identity,
+odometer, and fault codes across fifteen ECU addresses, plus twenty-six live Mode 01
+values polled at around 34 Hz.
 
-I linked comma.ai as evidence but do not know what the relationship is — used
-openpilot, contributed, reverse-engineered a car's bus with their tooling? Each
-means something different to a reader, so it is worth one clause. Correct or remove
-the link.
+The result so far is a negative one, which is the useful part. The segment exposed at
+the diagnostic connector carries no periodic broadcast traffic at all: everything has
+to be actively polled. Openpilot needs the periodic steering, camera, and ABS streams,
+so it is not reachable from that port — it would take a physical tap on the ADAS
+segment.
 
-CAN bus analysis is the outlier here: it is a genuinely uncommon skill and the one
-in this file most likely to be needed by someone who cannot easily find it elsewhere.
+Two things left before this comes out of draft. `depth` is still unset — this reads as
+working rather than deep, but that is your call. And the summary line above is my
+wording, not yours.
