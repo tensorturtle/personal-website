@@ -7,6 +7,7 @@ facets:
   - "Mechanical internals"
   - "CAN bus analysis"
   - "UDS / OBD-II diagnostics"
+depth: "working"
 offered: false
 evidence:
   - label: "casper-can — reverse-engineered the CAN bus of a 2024 Hyundai Casper"

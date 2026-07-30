@@ -34,10 +34,26 @@ const gifts = await Promise.all(
   })
 );
 
+// Intentions, kept structurally apart from the catalog above — see the schema note
+// in content.config.ts for why they are not just gifts with a flag.
+const directionEntries = (await getCollection("directions"))
+  .filter(entry => import.meta.env.DEV || !entry.data.draft);
+
+const giftName = (id: string) =>
+  collection.find(g => g.id === id)?.data.name ?? id;
+
+const directions = await Promise.all(
+  directionEntries.map(async (entry) => {
+    const { Content } = await render(entry);
+    return { ...entry, Content };
+  })
+);
+
 // Tags pointing at gift files that do not exist — surfaced rather than thrown.
 const knownIds = new Set(collection.map(e => e.id));
 const orphanTags = [...new Set(
-  [...posts, ...works].flatMap(e => e.data.gifts ?? []).filter(id => !knownIds.has(id))
+  [...posts, ...works, ...directionEntries]
+    .flatMap(e => e.data.gifts ?? []).filter(id => !knownIds.has(id))
 )].sort();
 
 // Content carrying no theme tag at all.
@@ -223,6 +239,97 @@ const drafts = gifts.length - published;
           </section>
         ))}
       </div>
+
+      {directions.length > 0 && (
+        <section class="animate space-y-6 pt-4 border-t border-black/10 dark:border-white/10">
+          <div class="font-semibold text-black dark:text-white">
+            Directions
+          </div>
+
+          <DevHint section="Directions — what you'd like to work on">
+            <p>
+              <strong>Why this is a separate list rather than a flag on a gift.</strong>
+              Every field in the gifts schema exists to stop a claim resting on assertion —
+              <code>evidence</code> above all. An intention cannot satisfy that, so putting
+              it in the same list would let it borrow credibility the requirement exists to
+              protect. Here there is no <code>evidence</code>, no <code>depth</code>, and no
+              dates, and that absence is the only thing marking these as a different kind of
+              claim. Resist adding them back when a direction starts to feel well-founded.
+            </p>
+            <p>
+              <strong>The framing.</strong> Gift and calling are distinct: one is given and
+              demonstrable, the other is sensed and cannot yet be. Both are received rather
+              than self-authored, which is what makes them the same worldview — but stating a
+              plan as though you control it is presumption, and the correction is not silence
+              about the future, it is holding it conditionally. So: no timelines, no "I will",
+              nothing that reads as a commitment to whoever is reading.
+            </p>
+            <p>
+              <strong>The name.</strong> "Directions" over "Callings", which is accurate but
+              would be the one word on the site that announces the worldview instead of
+              embodying it — against your subtlety pillar. It also echoes "Direction" in your
+              existing blog description. <code>Openings</code> and <code>Unspent</code> are
+              alternatives; the collection and this block are the only two places to rename.
+            </p>
+            <p>
+              <strong>Yours to decide:</strong>
+            </p>
+            <ul>
+              <li>
+                <strong>The neuroscience entry is my draft, not your words.</strong> The
+                argument is the one worth making — that you were prepared for a convergence
+                you did not arrange — but the sentences are mine and should be replaced. Note
+                what it deliberately avoids: citing Anthropic's interpretability work as
+                evidence that you belong in the field, rather than as evidence the field is
+                real.
+              </li>
+              <li>
+                <strong>There is no neuroscience gift file.</strong> Your training is the
+                whole premise of that entry and the catalog above has no record of it — the
+                clearest instance of the bias I flagged, where the repo only evidences what
+                the repo happens to contain.
+              </li>
+              <li>
+                <strong>Whether this belongs on the homepage instead.</strong> It sits here
+                because the stewardship logic reads as "here is what I have been given, and
+                here is where it might go." Promoting it to its own nav item would give
+                intentions equal billing with work done, which is the failure mode.
+              </li>
+              <li>
+                <strong>How many is too many.</strong> A long list of things you would like
+                to do reads as a wish list and devalues the catalog above it. Two or three.
+              </li>
+            </ul>
+          </DevHint>
+
+          <ul class="flex flex-col space-y-6">
+            {directions.map(direction => (
+              <li class="space-y-1">
+                <div class="flex flex-wrap items-baseline gap-x-2">
+                  <span class="font-semibold text-black dark:text-white">
+                    {direction.data.title}
+                  </span>
+                  <span class="text-sm opacity-75">{direction.data.domain}</span>
+                  {import.meta.env.DEV && direction.data.draft && (
+                    <span class="text-sm text-amber-700 dark:text-amber-400">
+                      &middot; draft
+                    </span>
+                  )}
+                </div>
+                <article class="text-sm opacity-75">
+                  <direction.Content />
+                </article>
+                {/* Not evidence — the preparation this would draw on. */}
+                {direction.data.gifts && direction.data.gifts.length > 0 && (
+                  <p class="text-sm opacity-75">
+                    draws on {direction.data.gifts.map(giftName).join(" · ")}
+                  </p>
+                )}
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
     </div>
   </Container>
 </PageLayout>

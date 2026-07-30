@@ -81,4 +81,38 @@ const gifts = defineCollection({
   }),
 });
 
-export const collections = { blog, portfolio, gifts };
+/**
+ * What you would like to work on but have not yet — held as intention, not as plan.
+ *
+ * This is deliberately a separate collection from `gifts` rather than a flag on it.
+ * A gift is evidenced: the schema above forces a claim of skill to point at something
+ * outside itself. A direction cannot be, because the work has not happened. Putting
+ * the two in one list would let an intention borrow the credibility the evidence
+ * requirement exists to protect.
+ *
+ * Hence what is absent here: no `evidence`, no `depth`, no dates. Their absence is
+ * the signal that this is a different kind of claim, and it should stay absent even
+ * when a direction starts to feel well-founded. When it becomes real, it graduates —
+ * a portfolio entry, a post, eventually a gift.
+ *
+ * On the register of the prose: state what draws you, not what you will do. No
+ * timelines and no promises to the reader — a stated intention about the future is
+ * a thing held provisionally, and the writing should sound like it.
+ */
+const directions = defineCollection({
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/directions" }),
+  schema: z.object({
+    title: z.string(),
+    // Reuse a `domain` value from the gifts above where one fits, so the two lists
+    // visibly relate rather than reading as unconnected.
+    domain: z.string(),
+    // Gift ids (filenames in src/content/gifts) this would draw on. The point of
+    // this field: it lets a direction say what preparation already exists without
+    // claiming the work is done — the only tether to evidence the section gets.
+    // Unresolved ids are reported on /gifts in dev rather than failing the build.
+    gifts: giftRefs,
+    draft: z.boolean().optional(),
+  }),
+});
+
+export const collections = { blog, portfolio, gifts, directions };
