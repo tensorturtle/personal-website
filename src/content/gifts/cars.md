@@ -11,7 +11,6 @@ offered: false
 evidence:
   - label: "casper-can — reverse-engineered the CAN bus of a 2024 Hyundai Casper"
     href: "https://github.com/tensorturtle/casper-can"
-draft: true
 ---
 
 Reverse-engineering my own car: a 2024 Hyundai Casper (AX), 1.0 T-GDi with HDA I,
@@ -26,6 +25,5 @@ to be actively polled. Openpilot needs the periodic steering, camera, and ABS st
 so it is not reachable from that port — it would take a physical tap on the ADAS
 segment.
 
-Two things left before this comes out of draft. `depth` is still unset — this reads as
-working rather than deep, but that is your call. And the summary line above is my
-wording, not yours.
+The work is ongoing: window position, parking brake, and climate settings have not
+been located yet.
