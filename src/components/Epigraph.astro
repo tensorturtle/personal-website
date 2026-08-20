@@ -1,0 +1,20 @@
+---
+/**
+ * A guiding quote set at the top of a page, above its content.
+ *
+ * The quote marks are supplied by the component, so pass `quote` as plain text.
+ * `cite` is the attribution line (a reference, a person, a work) and is optional
+ * for anonymous or self-evident sources.
+ */
+type Props = {
+  quote: string;
+  cite?: string;
+};
+
+const { quote, cite } = Astro.props;
+---
+
+<blockquote class="animate not-prose border-l-2 border-black/10 dark:border-white/20 pl-4 italic text-black/70 dark:text-white/70">
+  <p>&ldquo;{quote}&rdquo;</p>
+  {cite && <cite class="not-italic text-sm">{cite}</cite>}
+</blockquote>

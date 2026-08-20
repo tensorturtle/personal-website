@@ -4,6 +4,7 @@ import PageLayout from "@layouts/PageLayout.astro";
 import Container from "@components/Container.astro";
 import Link from "@components/Link.astro";
 import DevHint from "@components/DevHint.astro";
+import Epigraph from "@components/Epigraph.astro";
 import { GIFTS } from "@consts";
 
 // Drafts are visible in `npm run dev` only, so the candidate entries are
@@ -81,10 +82,10 @@ const drafts = gifts.length - published;
         Gifts
       </div>
 
-      <blockquote class="animate border-l-2 border-black/10 dark:border-white/20 pl-4 italic text-black/70 dark:text-white/70">
-        <p>&ldquo;We have different gifts, according to the grace given to each of us&rdquo;</p>
-        <cite class="not-italic text-sm">Romans 12:6</cite>
-      </blockquote>
+      <Epigraph
+        quote="We have different gifts, according to the grace given to each of us"
+        cite="Romans 12:6"
+      />
 
       <DevHint section="Gifts — the section itself">
         <p>
